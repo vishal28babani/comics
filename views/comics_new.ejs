@@ -1,0 +1,59 @@
+<%- include("partials/header") %>
+<div class="container">
+    <h1>
+        Add new comic
+    </h1>
+    <form action="/comics" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" autofocus placeholder="e.g. Watchmen" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" name="description">
+        </div>
+        <div class="mb-3">
+            <label for="author" class="form-label">Author</label>
+            <input type="text" class="form-control" name="author">
+        </div>
+        <div class="mb-3">
+            <label for="publisher" class="form-label">Publisher</label>
+            <input type="text" class="form-control" name="publisher">
+        </div>
+        <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" class="form-control" name="date">
+        </div>
+        <div class="mb-3">
+            <label for="series" class="form-label">Series</label>
+            <input type="text" class="form-control" name="series">
+        </div>
+        <div class="mb-3">
+            <label for="issue" class="form-label">Issue</label>
+            <input type="number" class="form-control" name="issue">
+        </div>
+        <div class="mb-3">
+            <label for="genre">Genre</label>
+            <select name="genre" id="" required> 
+                <option value="" disabled selected>--Choose--</option>
+                <option value="superhero">Superhero</option>
+                <option value="action">Action</option>
+                <option value="horror">Horror</option>
+                <option value="comedy">Comedy</option>
+                <option value="sci-fi">Sci-fi</option>
+            </select>
+        </div>
+        <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" name="color">
+        <label class="form-check-label" for="color">
+            Color?
+        </label>
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Link for image</label>
+            <input type="text" class="form-control" name="image">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<%- include("partials/footer") %>

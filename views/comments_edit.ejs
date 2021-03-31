@@ -1,0 +1,13 @@
+<%- include("./partials/header") %>
+
+    <div class="container">
+        <h1 class="my-2">Edit comment</h1>
+        <form action="/comics/<%=comment.comicId%>/comments/<%=comment.id%>?_method=PUT" method="post">
+            <div class="form-group mb-3">
+                <textarea class="form-control" name="text" id="text" cols="80" rows="8"><%=comment.text%></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+<%- include("./partials/footer") %>

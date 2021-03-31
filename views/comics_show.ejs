@@ -1,0 +1,88 @@
+<%- include("partials/header") %>
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-6 show_image-container">
+                <img src="<%=comic.image%>" alt="">
+            </div>
+            <div class="col-6 show_details-container">
+                <h1><%= comic.title %></h1>
+                <p><%= comic.description %></p>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Author</th>
+                            <td><%= comic.author %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Publisher</th>
+                            <td><%= comic.publisher %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Date</th>
+                            <td><%= comic.date %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Series</th>
+                            <td><%= comic.series %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Issue #</th>
+                            <td><%= comic.issue %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Genre</th>
+                            <td><%= comic.genre %></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Color</th>
+                            <td><%= comic.color %></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <form action="/comics/<%=comic.id%>/edit">
+                    <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-outline-info btn-lg mt-3">Edit Comic</button> 
+                    </div>
+                </form>
+                
+                <form action="/comics/<%=comic.id%>?_method=DELETE" method="post">
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-outline-danger btn-lg mt-3">Delete Comic</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row show_comment-header mt-3">
+            COMMENT HEADER
+        </div>
+        <form action="/comics/<%=comic.id%>/comments/new" method="get">
+            <div class="">
+                <button type="submit" class="btn btn-success btn-lg my-3">Add comment</button>
+            </div>
+        </form>
+        <% comments.forEach((comment)=>{ %>
+            <div class="row show_comment-container py-2 border">
+                <div class="col-2 border-right">
+                    <%= comment.owner.username%>
+                </div>
+                <div class="col-8 border-right">
+                    <%= comment.text %>
+                </div>
+                <div class="col-2 d-flex flex-row justify-content-evenly">
+                    <form action="/comics/<%=comic.id%>/comments/<%=comment.id%>/edit" method="get">
+                        <div class="">
+                            <button type="submit" class="btn btn-info btn-sm">Edit</button>
+                        </div>
+                    </form>
+                    <form action="/comics/<%=comic.id%>/comments/<%=comment.id%>?_method=DELETE" method="post">
+                        <div class="">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <% }) %>
+        <div class="py-5"></div>
+    </div>
+<%- include("partials/footer") %>
