@@ -9,7 +9,12 @@ const LocalStrategy = require("passport-local").Strategy;
 const expressSession = require("express-session")
 
 //config imports
-const config = require('./config')
+try {
+  var config = require('./config')
+} catch (error) {
+  //not working locally
+}
+
 
 //routes imports
 const comicRoutes = require("./routes/comics")
@@ -23,7 +28,11 @@ const Comment = require('./models/comment')
 const User = require('./models/user')
 
 //mongoose config
-mongoose.connect(config.db.connection, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+try {
+  mongoose.connect(config.db.connection, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+} catch (error) {
+  mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+}
 
 //bodyParser config
 app.use(bodyParser.urlencoded({extended:true}));
@@ -34,7 +43,7 @@ app.use(express.static("public"));
 
 //expressSession config
 app.use(expressSession({
-  secret: "asfvasdfasdghjsdfiu",
+  secret: process.env.ES_SECRET || config.expressSession.secret,
   resave: false,
   saveUninitialized: false
 }))
@@ -62,6 +71,6 @@ app.use("/",mainRoutes)
 app.use(authRoutes)
 
 //start server
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Server running");
 });
