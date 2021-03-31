@@ -61,7 +61,7 @@ app.use("/comics/:id/comments",commentRoutes)
 app.use("/",mainRoutes)
 app.use(authRoutes)
 
-
+//start server
 app.listen(3000, () => {
   console.log("Server running");
 });
