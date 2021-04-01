@@ -8,6 +8,7 @@ const isCommentOwner = async (req,res,next) => {
     }
     else
     {
+        req.flash("error", "You don't have permission to do that!")
         res.redirect("back")
     }
 }

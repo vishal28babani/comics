@@ -21,10 +21,12 @@ router.post("/", isLoggedIn, async (req,res)=>{
       username: req.user.username
     }
     })
+    req.flash("success", `Comment added!`)
     res.redirect(`/comics/${req.body.comicId}`)
   } catch (error) {
     console.log(error)
-    res.send("Error in comments create")
+    req.flash("error","Error creating comment")
+    res.send("/comics")
   }
 })
 
@@ -43,10 +45,12 @@ router.get("/:cid/edit", isLoggedIn, isCommentOwner, async (req,res)=>{
 router.put("/:cid", isLoggedIn, isCommentOwner, async (req,res)=>{
   try {
     await Comment.findByIdAndUpdate(req.params.cid, {text:req.body.text}, {new:true}).exec()
+    req.flash("success", `Comment updated!`)
     res.redirect(`/comics/${req.params.id}`)
   } catch (error) {
     console.log(error)
-    res.send("Error in comments update")
+    req.flash("error","Error updating comment")
+    res.redirect("/comics")
   }
 })
 
@@ -54,10 +58,12 @@ router.put("/:cid", isLoggedIn, isCommentOwner, async (req,res)=>{
 router.delete("/:cid", isLoggedIn, isCommentOwner, async (req,res)=>{
   try {
     await Comment.findByIdAndDelete(req.params.cid).exec()
+    req.flash("success", `Comment deleted!`)
     res.redirect(`/comics/${req.params.id}`)
   } catch (error) {
     console.log(error)
-    res.send("Error in comment delete")
+    req.flash("error","Error deleting comment")
+    res.redirect("back")
   }
 
 })
