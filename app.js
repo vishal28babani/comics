@@ -7,6 +7,7 @@ const methodOverride = require("method-override")
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy;
 const expressSession = require("express-session")
+const flash = require("connect-flash")
 
 //config imports
 try {
@@ -50,6 +51,8 @@ app.use(expressSession({
 
 //methodOverride config
 app.use(methodOverride("_method"))
+
+app.use(flash())
 
 //passport config
 app.use(passport.initialize())
