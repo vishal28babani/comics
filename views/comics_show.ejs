@@ -39,7 +39,7 @@
                         </tr>
                     </tbody>
                 </table>
-
+                <% if(comic.owner.id.equals(user.id)) { %>
                 <form action="/comics/<%=comic.id%>/edit">
                     <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-outline-info btn-lg mt-3">Edit Comic</button> 
@@ -51,6 +51,7 @@
                         <button type="submit" class="btn btn-outline-danger btn-lg mt-3">Delete Comic</button>
                     </div>
                 </form>
+                <% } %>
             </div>
         </div>
         <div class="row show_comment-header mt-3">
@@ -69,6 +70,7 @@
                 <div class="col-8 border-right">
                     <%= comment.text %>
                 </div>
+                <% if(comment.owner.id.equals(user.id)) { %>
                 <div class="col-2 d-flex flex-row justify-content-evenly">
                     <form action="/comics/<%=comic.id%>/comments/<%=comment.id%>/edit" method="get">
                         <div class="">
@@ -81,6 +83,7 @@
                         </div>
                     </form>
                 </div>
+                <% } %>
             </div>
         <% }) %>
         <div class="py-5"></div>

@@ -69,11 +69,11 @@ router.post("/", isLoggedIn, async (req,res)=>{
 })
 
 //Show
-router.get("/:id", async (req,res) => {
+router.get("/:id", isLoggedIn, async (req,res) => {
   try {
     const comic = await Comic.findById(req.params.id).exec()
     const comments = await Comment.find({comicId: req.params.id}).exec()
-    res.render("comics_show", { comic, comments });
+    res.render("comics_show", { comic, comments, user: req.user });
   } catch (error) {
     console.log(error)
     res.send("Error in comics show")
