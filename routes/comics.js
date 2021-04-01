@@ -24,6 +24,16 @@ router.get("/search", async (req,res)=>{
   }
 })
 
+router.get("/genre/:name", async (req, res) => {
+  try {
+    const comics = await Comic.find({genre: req.params.name.toLowerCase()}).exec()
+    res.render("comics", { comics });
+  } catch (err) {
+    console.log(err)
+    res.send(err)
+  }
+});
+
 //Index
 router.get("/", async (req, res) => {
   try {
