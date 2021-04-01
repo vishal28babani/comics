@@ -45,3 +45,17 @@
     </div>
   </div>
 </nav>
+<div class="container mt-2">
+  <% if(errorMessage.length > 0 ) { %>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <%= errorMessage[0] %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } %>
+  <% if(successMessage.length > 0 ) { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <%= successMessage[0] %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } %>
+</div>
