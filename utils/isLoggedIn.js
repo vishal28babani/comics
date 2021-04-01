@@ -5,6 +5,7 @@ const isLoggedIn = (req,res,next) => {
   }
   else
   {
+    req.flash("error", "You must log in to perform that!")
     res.redirect("/login")
   }
 }
