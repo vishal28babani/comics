@@ -67,7 +67,9 @@ router.post("/", isLoggedIn, async (req,res)=>{
     owner: {
       id: req.user.id,
       username: req.user.username
-    }
+    },
+    upvote: [],
+    downvote: []
   }
   try {
     const comic = await Comic.create(newComic)

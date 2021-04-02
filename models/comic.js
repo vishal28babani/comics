@@ -17,7 +17,9 @@ const comicSchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         }
-    }
+    },
+    upvote: [String],
+    downvote: [String]
 })
 
 comicSchema.index({
