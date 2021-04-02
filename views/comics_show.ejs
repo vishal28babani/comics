@@ -6,7 +6,10 @@
             </div>
             <div class="col-6 show_details-container">
                 <h1><%= comic.title %></h1>
-                <p><%= comic.description %></p>
+                <details>
+                    <summary>Comic Description</summary>
+                    <p><%= comic.description %></p>
+                </details>
                 <table class="table">
                     <tbody>
                         <tr>
@@ -54,8 +57,14 @@
                 <% } %>
             </div>
         </div>
-        <div class="row show_comment-header mt-3">
-            COMMENT HEADER
+        <div class="mb-3 ml-5">
+            <button class="btn btn-outline-success btn-lg">
+                <i class="fas fa-thumbs-up"></i>
+            </button>
+            <span class="mx-2">10</span>
+            <button class="btn btn-outline-danger btn-lg">
+                <i class="fas fa-thumbs-down"></i>
+            </button>
         </div>
         <form action="/comics/<%=comic.id%>/comments/new" method="get">
             <div class="">
@@ -86,6 +95,5 @@
                 <% } %>
             </div>
         <% }) %>
-        <div class="py-5"></div>
     </div>
 <%- include("partials/footer") %>
