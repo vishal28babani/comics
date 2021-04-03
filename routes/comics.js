@@ -36,9 +36,53 @@ router.get("/genre/:name", async (req, res) => {
 });
 
 //Vote
-router.post("/vote", isLoggedIn, (req,res)=>{
-  console.log(req.body)
-  res.json({message: "Voted!"})
+router.post("/vote", isLoggedIn, async (req,res)=>{
+  const comic = await Comic.findById(req.body.comicId)
+  const vote = {}
+  if(req.body.vote=="up")
+  {
+    if(comic.upvote.includes(req.user.username))
+    {
+      comic.upvote.splice(comic.upvote.indexOf(req.user.username),1)
+      vote.code = 0
+      comic.save()
+    }
+    else if(comic.downvote.includes(req.user.username))
+    {
+      comic.downvote.splice(comic.downvote.indexOf(req.user.username),1)
+      comic.upvote.push(req.user.username)
+      vote.code = 1
+      comic.save()
+    }
+    else{
+      comic.upvote.push(req.user.username)
+      vote.code = 1
+      comic.save()
+    }
+  }
+  if(req.body.vote=="down")
+  {
+    if(comic.upvote.includes(req.user.username))
+    {
+      comic.upvote.splice(comic.upvote.indexOf(req.user.username),1)
+      comic.downvote.push(req.user.username)
+      vote.code = -1
+      comic.save()
+    }
+    else if(comic.downvote.includes(req.user.username))
+    {
+      comic.downvote.splice(comic.downvote.indexOf(req.user.username),1)
+      vote.code = 0
+      comic.save()
+    }
+    else{
+      comic.downvote.push(req.user.username)
+      vote.code = -1
+      comic.save()
+    }
+  }
+  vote.count = comic.upvote.length - comic.downvote.length
+  res.json(vote)
 })
 
 //Index
