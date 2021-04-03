@@ -24,6 +24,7 @@ router.get("/search", async (req,res)=>{
   }
 })
 
+//Genre
 router.get("/genre/:name", async (req, res) => {
   try {
     const comics = await Comic.find({genre: req.params.name.toLowerCase()}).exec()
@@ -33,6 +34,12 @@ router.get("/genre/:name", async (req, res) => {
     res.send(err)
   }
 });
+
+//Vote
+router.post("/vote", isLoggedIn, (req,res)=>{
+  console.log(req.body)
+  res.json({message: "Voted!"})
+})
 
 //Index
 router.get("/", async (req, res) => {
