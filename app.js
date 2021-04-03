@@ -41,6 +41,9 @@ app.use(bodyParser.urlencoded({extended:true}));
 //express config
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(express.json({
+  type: ["application/json", "text/plain"]
+}))
 
 //expressSession config
 app.use(expressSession({
